@@ -13,7 +13,7 @@
 /*
 *  define or undefine USE_HARDWARESERIAL (uncomment only one or none)
 */
-//#undef USE_HARDWARESERIAL
+#undef USE_HARDWARESERIAL
 //#define USE_HARDWARESERIAL
 
 //------------------------------------------------------------------------------
@@ -81,7 +81,7 @@
 /*
 *  define user WAITING_TURNAROUND_DELAY time in ms to wait for process current request
 */
-#define WAITING_TURNAROUND_DELAY            1000
+#define WAITING_TURNAROUND_DELAY            800
 
 //------------------------------------------------------------------------------
 

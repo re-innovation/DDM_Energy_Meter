@@ -65,22 +65,22 @@ void loop() {
   Serial.print("Voltage:   ");
   Serial.print(sdm.readVal(DDM_PHASE_1_VOLTAGE, 0x15), 2);                            //display voltage
   Serial.println("V");
-  //Serial.println(sdm.getErrCode(true));
-  delay(500);
-  Serial.print("Current:   ");
-  Serial.print(sdm.readVal(DDM_PHASE_1_CURRENT, 0x15), 2);                            //display current
-  Serial.println("A");
-  //Serial.println(sdm.getErrCode(true));
-  delay(500);
-  Serial.print("Power:     ");
-  Serial.print(sdm.readVal(DDM_PHASE_1_POWER, 0x15), 2);                              //display power
-  Serial.println("W");
-  //Serial.println(sdm.getErrCode(true));
-  delay(500);
-  Serial.print("Frequency: ");
-  Serial.print(sdm.readVal(DDM_FREQUENCY, 0x15), 2);                                  //display frequency
-  Serial.println("Hz");
-  //Serial.println(sdm.getErrCode(true));
+  Serial.println(sdm.getErrCode(true));
+//  delay(2000);
+//  Serial.print("Current:   ");
+//  Serial.print(sdm.readVal(DDM_PHASE_1_CURRENT, 0x15), 2);                            //display current
+//  Serial.println("A");
+//  Serial.println(sdm.getErrCode(true));
+//  delay(200);
+//  Serial.print("Power:     ");
+//  Serial.print(sdm.readVal(DDM_PHASE_1_POWER, 0x15), 2);                              //display power
+//  Serial.println("W");
+//  Serial.println(sdm.getErrCode(true));
+//  delay(200);
+//  Serial.print("Frequency: ");
+//  Serial.print(sdm.readVal(DDM_FREQUENCY, 0x15), 2);                                  //display frequency
+//  Serial.println("Hz");
+//  Serial.println(sdm.getErrCode(true));
 
   delay(1000);                                                                  //wait a while before next loop
 }

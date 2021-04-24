@@ -102,12 +102,11 @@ float SDM::readVal(uint16_t reg, uint8_t node) {
   delay(2);                                                                     //fix for issue (nan reading) by sjfaustino: https://github.com/reaper7/SDM_Energy_Meter/issues/7#issuecomment-272111524
 
   sdmSer.write(sdmarr, FRAMESIZE - 1);                                          //send 8 bytes
-
+  
   sdmSer.flush();                                                               //clear out tx buffer
-
+  
   dereSet(LOW);                                                                 //receive from SDM -> DE Disable, /RE Enable (for control MAX485)
-
-
+  
   resptime = millis() + WAITING_TURNAROUND_DELAY;
 
   while (sdmSer.available() < FRAMESIZE) {
@@ -117,10 +116,8 @@ float SDM::readVal(uint16_t reg, uint8_t node) {
     }
     yield();
   }
-  
-  if (readErr == SDM_ERR_NO_ERROR) {                                            //if no timeout...
 
-    //sdmSer.read();    // Get rid of first (incorrect) byte?....
+  if (readErr == SDM_ERR_NO_ERROR) {                                            //if no timeout...
 
     if (sdmSer.available() >= FRAMESIZE) {
 
@@ -128,12 +125,30 @@ float SDM::readVal(uint16_t reg, uint8_t node) {
         sdmarr[n] = sdmSer.read();
       }
 
-//      // DEBUG!!
-//      Serial.print("DEBUG: ");
+      // DEBUG!!
+      Serial.print("DEBUG: ");
+      for (int n = 0; n < FRAMESIZE; n++) {
+        Serial.print(sdmarr[n], HEX);
+      }
+      Serial.println();
+
+//      //Convert by shifting all along one:
+//      for (int n = 0; n < FRAMESIZE; n++) {
+//        sdmarr[n] = sdmarr[n+1];
+//      }      
+//      
+//      Serial.print("Converted: ");
 //      for (int n = 0; n < FRAMESIZE; n++) {
 //        Serial.print(sdmarr[n], HEX);
 //      }
 //      Serial.println();
+      
+      //      // We get an additional byte at the beginning with the PRO MINI. Bit strange!!
+      //      // But basically need to shift along one?
+      //      // Want to shift the data along one
+      //      for (int n = 0; n < FRAMESIZE + 1; n++) {
+      //        sdmarr[n] = sdmarr[n + 1];
+      //      }
 
       if (sdmarr[0] == node && sdmarr[1] == SDM_B_02 && sdmarr[2] == SDM_REPLY_BYTE_COUNT) {
 
